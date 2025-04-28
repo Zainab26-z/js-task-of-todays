@@ -1,56 +1,246 @@
-<!-- 1 Age to Days converter : When a user enters age (in years), the converter will convert it to days.. -->
-<h1>Years into days</h1>
-<label for="years">Enter years:</label>
-<input type="number" id="years" placeholder="enter years">
-<button id="btn">Convert into days</button>
-<p id="result1"></p>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>JavaScript Exercises</title>
+    
+</head>
+<body>
+    <h1>JavaScript Exercises with DOM Event Listeners</h1>
 
-<script>
-const yearInput = document.getElementById('years');
-const btn = document.getElementById('btn');
-const resultDisplay = document.getElementById('result1');
+    <!-- Exercise 1: Age to Days Converter -->
+    <div class="exercise">
+        <h2>1. Age to Days Converter</h2>
+        <input type="number" id="ageInput" placeholder="Enter age in years" min="1">
+        <button id="ageBtn">Convert to Days</button>
+        <div id="ageResult" class="result"></div>
+    </div>
 
-btn.addEventListener('click', function(){
- const years = parseFloat(yearInput.value);
- 
- if (isNaN(years)) {
-     resultDisplay.textContent = 'Please enter a valid number';
-     return;
- }
-   
- // 1 year has 365 days
- const days = years * 365;
-   
- resultDisplay.textContent = `${years} years = ${days} days`;
-}); 
-</script>
+    <!-- Exercise 2: Hours to Seconds Converter -->
+    <div class="exercise">
+        <h2>2. Hours to Seconds Converter</h2>
+        <input type="number" id="hoursInput" placeholder="Enter hours" min="0">
+        <button id="hoursBtn">Convert to Seconds</button>
+        <div id="hoursResult" class="result"></div>
+    </div>
 
- <!-- 2. Hours to seconds converter -->
- <h1>Hours to Seconds Converter</h1>
-  
- <label for="hours">Enter hours:</label>
- <input type="number" id="hours" placeholder="Enter hours">
- 
- <button id="convertBtn">Convert to Seconds</button>
- 
- <p id="result"></p>
+    <!-- Exercise 3: Find Next Number -->
+    <div class="exercise">
+        <h2>3. Find Next Number</h2>
+        <h3>In Array [5, 12, 8, 20, 15]</h3>
+        <input type="number" id="arrayNum" placeholder="Enter number from array">
+        <button id="arrayBtn">Find Next in Array</button>
+        <div id="arrayResult" class="result"></div>
+        
+        <h3>From Any Number</h3>
+        <input type="text" id="anyNum" placeholder="Enter any number">
+        <button id="anyNumBtn">Find Next Number</button>
+        <div id="anyNumResult" class="result"></div>
+    </div>
 
- <script>
-   const hoursInput = document.getElementById('hours');
-   const convertBtn = document.getElementById('convertBtn');
-   const resultDisplay = document.getElementById('result');
+    <!-- Exercise 4: Capitalize Name -->
+    <div class="exercise">
+        <h2>4. Capitalize Name (First and Last Letter)</h2>
+        <input type="text" id="nameInput" placeholder="Enter name in lowercase">
+        <button id="nameBtn">Capitalize</button>
+        <div id="nameResult" class="result"></div>
+    </div>
 
-   convertBtn.addEventListener('click', function() {
-     const hours = parseFloat(hoursInput.value);
-     
-     if (isNaN(hours)) {
-       resultDisplay.textContent = 'Please enter a valid number';
-       return;
-     }
-     
-     // Convert hours to seconds (1 hour = 3600 seconds)
-     const seconds = hours * 3600;
-     
-     resultDisplay.textContent = `${hours} hours = ${seconds} seconds`;
-   });
- </script>
+    <!-- Exercise 5: BMI Calculator -->
+    <div class="exercise">
+        <h2>5. BMI Calculator</h2>
+        <div>
+            <label>Weight (kg):</label>
+            <input type="number" id="weight" placeholder="Enter weight" min="1" step="0.1">
+        </div>
+        <div>
+            <label>Height (m):</label>
+            <input type="number" id="height" placeholder="Enter height" min="0.1" step="0.01">
+        </div>
+        <button id="bmiBtn">Calculate BMI</button>
+        <div id="bmiResult" class="result"></div>
+    </div>
+
+    <!-- Exercise 6: Array First & Last Element -->
+    <div class="exercise">
+        <h2>6. Array First & Last Element</h2>
+        <button id="arrayGenBtn">Generate Random Array</button>
+        <div id="arrayOutput" class="result"></div>
+        <div id="arrayElements" class="result"></div>
+    </div>
+
+    <!-- Exercise 7: Addition of Two Numbers -->
+    <div class="exercise">
+        <h2>7. Dynamic Addition Calculator</h2>
+        <div>
+            <label>First number:</label>
+            <input type="number" id="num1" placeholder="Enter first number">
+        </div>
+        <div>
+            <label>Second number:</label>
+            <input type="number" id="num2" placeholder="Enter second number">
+        </div>
+        <div>
+            <label>Result:</label>
+            <input type="number" id="sum" placeholder="Result" readonly>
+        </div>
+    </div>
+
+    <script>
+        // 1. Age to Days Converter
+        document.getElementById('ageBtn').addEventListener('click', function() {
+            const age = parseFloat(document.getElementById('ageInput').value);
+            const resultElement = document.getElementById('ageResult');
+            
+            if (!isNaN(age)) {
+                const days = Math.round(age * 365.25); // Account for leap years
+                resultElement.textContent = `${age} years = ${days} days`;
+                resultElement.className = 'result';
+            } else {
+                resultElement.textContent = 'Please enter a valid age';
+                resultElement.className = 'result error';
+            }
+        });
+
+        // 2. Hours to Seconds Converter
+        document.getElementById('hoursBtn').addEventListener('click', function() {
+            const hours = parseFloat(document.getElementById('hoursInput').value);
+            const resultElement = document.getElementById('hoursResult');
+            
+            if (!isNaN(hours)) {
+                const seconds = hours * 3600;
+                resultElement.textContent = `${hours} hours = ${seconds} seconds`;
+                resultElement.className = 'result';
+            } else {
+                resultElement.textContent = 'Please enter valid hours';
+                resultElement.className = 'result error';
+            }
+        });
+
+        // 3. Find Next Number
+        const numbers = [5, 12, 8, 20, 15];
+        
+        // Array scenario
+        document.getElementById('arrayBtn').addEventListener('click', function() {
+            const num = parseInt(document.getElementById('arrayNum').value);
+            const resultElement = document.getElementById('arrayResult');
+            const index = numbers.indexOf(num);
+            
+            if (index !== -1) {
+                if (index < numbers.length - 1) {
+                    resultElement.textContent = `Next number after ${num} is ${numbers[index + 1]}`;
+                } else {
+                    resultElement.textContent = `${num} is the last number in array`;
+                }
+                resultElement.className = 'result';
+            } else {
+                resultElement.textContent = `${num} not found in array [${numbers.join(', ')}]`;
+                resultElement.className = 'result error';
+            }
+        });
+        
+        // Any number scenario
+        document.getElementById('anyNumBtn').addEventListener('click', function() {
+            const input = document.getElementById('anyNum').value;
+            const resultElement = document.getElementById('anyNumResult');
+            
+            if (input.includes('.')) {
+                const num = parseFloat(input);
+                if (!isNaN(num)) {
+                    resultElement.textContent = `Next number after ${num} is ${num + 1}`;
+                    resultElement.className = 'result';
+                }
+            } else {
+                const num = parseInt(input);
+                if (!isNaN(num)) {
+                    resultElement.textContent = `Next number after ${num} is ${num + 1}`;
+                    resultElement.className = 'result';
+                }
+            }
+            
+            if (!resultElement.textContent) {
+                resultElement.textContent = 'Please enter a valid number';
+                resultElement.className = 'result error';
+            }
+        });
+
+        document.getElementById('nameBtn').addEventListener('click', function() {
+    const fullName = document.getElementById('nameInput').value.trim().toLowerCase();
+    const resultElement = document.getElementById('nameResult');
+    
+    if (fullName.length > 0) {
+        // Split into your name and father's name
+        const names = fullName.split(' ');
+        
+        if (names.length >= 2) {
+            // Capitalize first letter of each name
+            const yourName = names[0].charAt(0).toUpperCase() + names[0].slice(1);
+            const secondName = names[1].charAt(0).toUpperCase() + names[1].slice(1);
+            
+            resultElement.textContent = `${yourName} ${secondName}`;
+            resultElement.className = 'result';
+        } else {
+            resultElement.textContent = 'Please enter both your name and father\'s name separated by a space';
+            resultElement.className = 'result error';
+        }
+    } else {
+        resultElement.textContent = 'Please enter a name';
+        resultElement.className = 'result error';
+    }
+});
+
+        // 5. BMI Calculator
+        document.getElementById('bmiBtn').addEventListener('click', function() {
+            const weight = parseFloat(document.getElementById('weight').value);
+            const height = parseFloat(document.getElementById('height').value);
+            const resultElement = document.getElementById('bmiResult');
+            
+            if (!isNaN(weight) && !isNaN(height) && height > 0) {
+                const bmi = (weight / (height * height)).toFixed(1);
+                let category;
+                
+                if (bmi < 18.5) category = "Underweight";
+                else if (bmi < 25) category = "Normal weight";
+                else if (bmi < 30) category = "Overweight";
+                else category = "Obese";
+                
+                resultElement.textContent = `BMI: ${bmi} (${category})`;
+                resultElement.className = 'result';
+            } else {
+                resultElement.textContent = 'Please enter valid weight and height';
+                resultElement.className = 'result error';
+            }
+        });
+
+        // 6. Array First & Last Element
+        document.getElementById('arrayGenBtn').addEventListener('click', function() {
+            const arrLength = Math.floor(Math.random() * 6) + 5; // 5-10 elements
+            const arr = [];
+            
+            for (let i = 0; i < arrLength; i++) {
+                arr.push(Math.floor(Math.random() * 100) + 1);
+            }
+            
+            document.getElementById('arrayOutput').textContent = `Generated Array: [${arr.join(', ')}]`;
+            document.getElementById('arrayElements').textContent = 
+                `First Element: ${arr[0]}, Last Element: ${arr[arr.length - 1]}`;
+        });
+
+        // 7. Dynamic Addition Calculator
+        document.getElementById('num1').addEventListener('input', function() {
+            document.getElementById('sum').value = 'NaN';
+        });
+        
+        document.getElementById('num2').addEventListener('input', function() {
+            const num1 = parseFloat(document.getElementById('num1').value);
+            const num2 = parseFloat(document.getElementById('num2').value);
+            const sumElement = document.getElementById('sum');
+            
+            if (!isNaN(num1) && !isNaN(num2)) {
+                sumElement.value = num1 + num2;
+            } else {
+                sumElement.value = 'NaN';
+            }
+        });
+    </script>
+</body>
+</html>
