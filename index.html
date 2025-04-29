@@ -24,16 +24,11 @@
 
     <!-- Exercise 3: Find Next Number -->
     <div>
-        <h2>3. Find Next Number</h2>
-        <h3>In Array [5, 12, 8, 20, 15]</h3>
-        <input type="number" id="arrayNum" placeholder="Enter number from array">
-        <button id="arrayBtn">Find Next in Array</button>
-        <div id="arrayResult" class="result"></div>
-        
-        <h3>From Any Number</h3>
-        <input type="text" id="anyNum" placeholder="Enter any number">
-        <button id="anyNumBtn">Find Next Number</button>
-        <div id="anyNumResult" class="result"></div>
+        <h2>Number Incrementer</h2>
+        <p>Enter either a single number or comma-separated numbers:</p>
+        <input type="text" id="numberInput" placeholder="e.g. 7 or 1,3,4,5">
+        <button id="calculateBtn">Get Next Number</button>
+        <div id="arrayresult"></div>
     </div>
 
     <!-- Exercise 4: Capitalize Name -->
@@ -117,53 +112,18 @@
         });
 
         // 3. Find Next Number
-        const numbers = [5, 12, 8, 20, 15];
-        
-        // Array scenario
-        document.getElementById('arrayBtn').addEventListener('click', function() {
-            const num = parseInt(document.getElementById('arrayNum').value);
-            const resultElement = document.getElementById('arrayResult');
-            // index is position in an array like value of index is 0 like array ha 5, 10 ,15 to index 0 ho ga
-            const index = numbers.indexOf(num);
-            
-            if (index !== -1) {
-                if (index < numbers.length - 1) {
-                    resultElement.textContent = `Next number after ${num} is ${numbers[index + 1]}`;
-                } else {
-                    resultElement.textContent = `${num} is the last number in array`;
-                }
-                resultElement.className = 'result';
-            } else {
-                resultElement.textContent = `${num} not found in array [${numbers.join(', ')}]`;
-           
-            }
-        });
-        
-        // Any number scenario
-        document.getElementById('anyNumBtn').addEventListener('click', function() {
-            const input = document.getElementById('anyNum').value;
-            const resultElement = document.getElementById('anyNumResult');
-            
-            if (input.includes('.')) {
-                const num = parseFloat(input);
-                if (!isNaN(num)) {
-                    resultElement.textContent = `Next number after ${num} is ${num + 1}`;
-                    resultElement.className = 'result';
-                }
-            } else {
-                const num = parseInt(input);
-                if (!isNaN(num)) {
-                    resultElement.textContent = `Next number after ${num} is ${num + 1}`;
-                    resultElement.className = 'result';
-                }
-            }
-            
-            if (!resultElement.textContent) {
-                resultElement.textContent = 'Please enter a valid number';
-                
-            }
-        });
 
+        // this is for click btn to perform function
+        document.getElementById('calculateBtn').addEventListener('click', () => {
+            // split(',') splits the input string into an array ,  converts each string element in the array to a number "1" ko 1
+            const nums = document.getElementById('numberInput').value.split(',').map(Number);
+            document.getElementById('arrayresult').textContent = 
+            // validation
+                nums.some(isNaN) ? 'Invalid input' : `Next number: ${nums[nums.length-1]+1}`;
+        });
+    
+      
+// .......................
         document.getElementById('nameBtn').addEventListener('click', function() {
     const fullName = document.getElementById('nameInput').value.trim().toLowerCase();
     const resultElement = document.getElementById('nameResult');
@@ -173,19 +133,22 @@
         const names = fullName.split(' ');
         
         if (names.length >= 2) {
-            // Capitalize first letter of first and second name
-            const yourName = names[0].charAt(0).toUpperCase() + names[0].slice(1);
-            const secondName = names[1].charAt(0).toUpperCase() + names[1].slice(1);
+            // Process all names with a loop
+            const processedNames = [];
+            for (let i = 0; i < names.length; i++) {
+                // Capitalize first letter of each name
+                const capitalized = names[i].charAt(0).toUpperCase() + names[i].slice(1);
+                processedNames.push(capitalized);
+            }
             
-            resultElement.textContent = `${yourName} ${secondName}`;
+            // Join all processed names with spaces
+            resultElement.textContent = processedNames.join(' ');
             resultElement.className = 'result';
         } else {
-            resultElement.textContent = 'Please enter both your name and father\'s name separated by a space';
-          
+            resultElement.textContent = 'Please enter at least two names separated by spaces';
         }
     } else {
         resultElement.textContent = 'Please enter a name';
-        
     }
 });
 
@@ -245,6 +208,5 @@
     </script>
 </body>
 </html>
-
 
 
