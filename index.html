@@ -7,12 +7,12 @@
 <body>
 
     <!-- Exercise 1: Age to Days Converter -->
+    <h2>Age to Days Converter</h2>
     <div>
-        <h2>1. Age to Days Converter</h2>
-        <input type="number" id="ageInput" placeholder="Enter age in years">
-        <button id="ageBtn">Convert to Days</button>
-        <div id="ageResult" class="result"></div>
+        <input type="text" id="ageInput" placeholder="Enter age">
+        <button id="ageBtn">Calculate</button>
     </div>
+    <div id="ageResult"></div>
 
     <!-- Exercise 2: Hours to Seconds Converter -->
     <div>
@@ -83,34 +83,38 @@
         // 1. Age to Days Converter 
         // addEventListenser mean when someone click button its run the functin matlb click k baad tou ..
         document.getElementById('ageBtn').addEventListener('click', function() {
-            const age = parseFloat(document.getElementById('ageInput').value);
+            // Get input value
+            const input = document.getElementById('ageInput').value;
+            const age = parseFloat(input);
             const resultElement = document.getElementById('ageResult');
             
-            if (!isNaN(age)) {
-                const days = Math.round(age * 365.25); 
+            // Simple check
+            if (age > 0) {
+                const days = Math.round(age * 365.25);
                 resultElement.textContent = `${age} years = ${days} days`;
-                resultElement.className = 'result';
-            } else {
-                resultElement.textContent = 'Please enter a valid age';
-               
+                resultElement.className = "success";
+            } 
+            else {
+                resultElement.textContent = "Please enter a positive number";
+                resultElement.className = "error";
             }
         });
-
+// ......................
         // 2. Hours to Seconds Converter
         document.getElementById('hoursBtn').addEventListener('click', function() {
-            const hours = parseFloat(document.getElementById('hoursInput').value);
-            const resultElement = document.getElementById('hoursResult');
-            
-            if (!isNaN(hours)) {
-                const seconds = hours * 3600;
-                resultElement.textContent = `${hours} hours = ${seconds} seconds`;
-                resultElement.className = 'result';
-            } else {
-                resultElement.textContent = 'Please enter valid hours';
-              
-            }
-        });
+      const hours = parseFloat(document.getElementById('hoursInput').value);
+      const resultElement = document.getElementById('hoursResult');
 
+      if (isNaN(hours) || hours < 0) {
+          resultElement.textContent = " Please enter a valid positive number";
+          
+      } else {
+          const seconds = hours * 3600;
+          resultElement.textContent = `${hours} hours = ${seconds} seconds`;
+          
+      }
+  });
+// ....................
         // 3. Find Next Number
 
         // this is for click btn to perform function
