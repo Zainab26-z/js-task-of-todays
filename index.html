@@ -1,30 +1,29 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>JavaScript Exercises</title>
+    <title>Javascript task 1</title>
     
 </head>
 <body>
-    <h1>JavaScript Exercises with DOM Event Listeners</h1>
 
     <!-- Exercise 1: Age to Days Converter -->
-    <div class="exercise">
+    <div>
         <h2>1. Age to Days Converter</h2>
-        <input type="number" id="ageInput" placeholder="Enter age in years" min="1">
+        <input type="number" id="ageInput" placeholder="Enter age in years">
         <button id="ageBtn">Convert to Days</button>
         <div id="ageResult" class="result"></div>
     </div>
 
     <!-- Exercise 2: Hours to Seconds Converter -->
-    <div class="exercise">
+    <div>
         <h2>2. Hours to Seconds Converter</h2>
-        <input type="number" id="hoursInput" placeholder="Enter hours" min="0">
+        <input type="number" id="hoursInput" placeholder="Enter hours">
         <button id="hoursBtn">Convert to Seconds</button>
         <div id="hoursResult" class="result"></div>
     </div>
 
     <!-- Exercise 3: Find Next Number -->
-    <div class="exercise">
+    <div>
         <h2>3. Find Next Number</h2>
         <h3>In Array [5, 12, 8, 20, 15]</h3>
         <input type="number" id="arrayNum" placeholder="Enter number from array">
@@ -38,39 +37,39 @@
     </div>
 
     <!-- Exercise 4: Capitalize Name -->
-    <div class="exercise">
-        <h2>4. Capitalize Name (First and Last Letter)</h2>
+    <div>
+        <h2>4. Capitalize Name (First and Second Letter)</h2>
         <input type="text" id="nameInput" placeholder="Enter name in lowercase">
-        <button id="nameBtn">Capitalize</button>
+        <button id="nameBtn">Capital</button>
         <div id="nameResult" class="result"></div>
     </div>
 
     <!-- Exercise 5: BMI Calculator -->
-    <div class="exercise">
+    <div>
         <h2>5. BMI Calculator</h2>
         <div>
             <label>Weight (kg):</label>
-            <input type="number" id="weight" placeholder="Enter weight" min="1" step="0.1">
+            <input type="number" id="weight" placeholder="Enter weight">
         </div>
         <div>
             <label>Height (m):</label>
-            <input type="number" id="height" placeholder="Enter height" min="0.1" step="0.01">
+            <input type="number" id="height" placeholder="Enter height">
         </div>
         <button id="bmiBtn">Calculate BMI</button>
         <div id="bmiResult" class="result"></div>
     </div>
 
     <!-- Exercise 6: Array First & Last Element -->
-    <div class="exercise">
+    <div>
         <h2>6. Array First & Last Element</h2>
-        <button id="arrayGenBtn">Generate Random Array</button>
+        <button id="arrayBtn2">Generate Random Array</button>
         <div id="arrayOutput" class="result"></div>
         <div id="arrayElements" class="result"></div>
     </div>
 
     <!-- Exercise 7: Addition of Two Numbers -->
-    <div class="exercise">
-        <h2>7. Dynamic Addition Calculator</h2>
+    <div>
+        <h2>7. Addition Calculator</h2>
         <div>
             <label>First number:</label>
             <input type="number" id="num1" placeholder="Enter first number">
@@ -86,18 +85,19 @@
     </div>
 
     <script>
-        // 1. Age to Days Converter
+        // 1. Age to Days Converter 
+        // addEventListenser mean when someone click button its run the functin matlb click k baad tou ..
         document.getElementById('ageBtn').addEventListener('click', function() {
             const age = parseFloat(document.getElementById('ageInput').value);
             const resultElement = document.getElementById('ageResult');
             
             if (!isNaN(age)) {
-                const days = Math.round(age * 365.25); // Account for leap years
+                const days = Math.round(age * 365.25); 
                 resultElement.textContent = `${age} years = ${days} days`;
                 resultElement.className = 'result';
             } else {
                 resultElement.textContent = 'Please enter a valid age';
-                resultElement.className = 'result error';
+               
             }
         });
 
@@ -112,7 +112,7 @@
                 resultElement.className = 'result';
             } else {
                 resultElement.textContent = 'Please enter valid hours';
-                resultElement.className = 'result error';
+              
             }
         });
 
@@ -123,6 +123,7 @@
         document.getElementById('arrayBtn').addEventListener('click', function() {
             const num = parseInt(document.getElementById('arrayNum').value);
             const resultElement = document.getElementById('arrayResult');
+            // index is position in an array like value of index is 0 like array ha 5, 10 ,15 to index 0 ho ga
             const index = numbers.indexOf(num);
             
             if (index !== -1) {
@@ -134,7 +135,7 @@
                 resultElement.className = 'result';
             } else {
                 resultElement.textContent = `${num} not found in array [${numbers.join(', ')}]`;
-                resultElement.className = 'result error';
+           
             }
         });
         
@@ -159,7 +160,7 @@
             
             if (!resultElement.textContent) {
                 resultElement.textContent = 'Please enter a valid number';
-                resultElement.className = 'result error';
+                
             }
         });
 
@@ -172,7 +173,7 @@
         const names = fullName.split(' ');
         
         if (names.length >= 2) {
-            // Capitalize first letter of each name
+            // Capitalize first letter of first and second name
             const yourName = names[0].charAt(0).toUpperCase() + names[0].slice(1);
             const secondName = names[1].charAt(0).toUpperCase() + names[1].slice(1);
             
@@ -180,11 +181,11 @@
             resultElement.className = 'result';
         } else {
             resultElement.textContent = 'Please enter both your name and father\'s name separated by a space';
-            resultElement.className = 'result error';
+          
         }
     } else {
         resultElement.textContent = 'Please enter a name';
-        resultElement.className = 'result error';
+        
     }
 });
 
@@ -207,15 +208,15 @@
                 resultElement.className = 'result';
             } else {
                 resultElement.textContent = 'Please enter valid weight and height';
-                resultElement.className = 'result error';
+                
             }
         });
 
         // 6. Array First & Last Element
-        document.getElementById('arrayGenBtn').addEventListener('click', function() {
-            const arrLength = Math.floor(Math.random() * 6) + 5; // 5-10 elements
+        document.getElementById('arrayBtn2').addEventListener('click', function() {
+            const arrLength = Math.floor(Math.random() * 6) + 5; // math floora nd math random  these are btwn 0 and 1 0.6 something that is math.random and math.floor is number 0-5 etc so we use here....
             const arr = [];
-            
+            // loop run tb tk jb tk condition true ay agr i 0 value sy ziada like 1 hua it stop...like i < 5 tou 6 py stop
             for (let i = 0; i < arrLength; i++) {
                 arr.push(Math.floor(Math.random() * 100) + 1);
             }
@@ -244,3 +245,6 @@
     </script>
 </body>
 </html>
+
+
+
